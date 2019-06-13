@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import { withRouter  } from 'react-router-dom'
+import { withRouter,Link  } from 'react-router-dom'
 class SignUp extends Component{
     constructor(props){
         super(props)
@@ -50,6 +50,7 @@ class SignUp extends Component{
                     <label htmlFor="Password">Password</label>
                     <input type="text" name="password" onChange={this.handleChnage} className="form-control"/>
                 </div>
+                <div><p>You have already Account ? <Link to="/signin" >Sign in now</Link> </p> </div>
                 <input type="submit" value="Sign up" className="btn btn-primary" />
             </form>
         )

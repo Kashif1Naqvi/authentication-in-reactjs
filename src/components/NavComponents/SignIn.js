@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import {withRouter,Redirect} from 'react-router-dom'
+import {withRouter,Redirect,Link} from 'react-router-dom'
 class SignIn extends Component{
     constructor(props){
         super(props)
@@ -72,6 +72,7 @@ class SignIn extends Component{
                 </div>
                 <p className="alert-danger" >{this.state.error}</p>
                 <input type="submit" value="Login" className="btn btn-primary" />
+                <div>Don't have a account? <Link  to="/signup" >SignUp now</Link> </div>
             </form>
         )
     }

@@ -4,8 +4,6 @@ import SignIn from './NavComponents/SignIn';
 import Dashboard from './NavComponents/Dashboard';
 import Home from './NavComponents/Home';
 import SignUp from './NavComponents/SignUp';
-import Logout from './NavComponents/Logout';
-
 class Authentication extends Component{
     render(){
         return(
@@ -15,8 +13,6 @@ class Authentication extends Component{
                         <Route path="/dashboard" component={ render=><Dashboard />} />
                         <Route path="/signin" component={ render => <SignIn />} />
                         <Route path="/signup" component={ render=> <SignUp /> } />
-                        <Route path="/logout" component={render=><Logout  />} />
-                        
                 </div>
             </Router>
         )
