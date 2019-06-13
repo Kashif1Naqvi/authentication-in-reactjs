@@ -5,13 +5,16 @@ class SignIn extends Component{
         super(props)
         let token = localStorage.getItem('token')
         let loggedin = true
+        
         if(token == null){
             loggedin = false
         }
+
         this.state = {
             email:"",
             password:"",
             loggedin,
+            error : null
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -44,9 +47,10 @@ class SignIn extends Component{
          let token = data.token
           localStorage.setItem('token',JSON.stringify(token))
           this.props.history.push('/dashboard')
-        }
-        else{
-            console.log("please type correct userName and password")
+        }else{
+            this.setState({
+                error : data.error
+            })
         }
     }
 
@@ -66,8 +70,8 @@ class SignIn extends Component{
                     <label htmlFor="Password">Password</label>
                     <input type="text"  name="password" onChange={this.handleChange}  className="form-control"/>
                 </div>
+                <p className="alert-danger" >{this.state.error}</p>
                 <input type="submit" value="Login" className="btn btn-primary" />
-
             </form>
         )
     }
