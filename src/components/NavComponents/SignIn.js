@@ -35,7 +35,6 @@ class SignIn extends Component{
         })
 
         let data = await res.json() 
-        console.log(data.token)
         if( res.status === 200 ){ 
           localStorage.setItem('token', JSON.stringify(data.token))
           this.props.history.push('/dashboard')
@@ -49,7 +48,7 @@ class SignIn extends Component{
     render(){ 
         return(
 
-            <form onSubmit={this.handleSubmit} className="form form-horizontal " >
+            <form onSubmit={this.handleSubmit} className="form form-horizontal" >
                 <h1 className="text-muted" >Sign In</h1>
                 <div className="form-group">
                     <label htmlFor="Email">Email</label>
@@ -61,7 +60,7 @@ class SignIn extends Component{
                 </div>
                 {this.state.error?<p className="alert alert-danger" >{this.state.error}</p>:""}
                 <input type="submit" value="Login" className="btn btn-success" />
-                <div>Don't have a account? <Link  to="/signup" >SignUp now</Link> </div>
+                <div>Don't have a account?<Link  to="/signup" >SignUp now</Link> </div>
             </form>
         )
     }

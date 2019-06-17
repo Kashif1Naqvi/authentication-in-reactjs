@@ -9,16 +9,16 @@ class Dashboard extends Component{
         }
     }
     logout = () => {
-        localStorage.clear();
-        this.props.history.push('/')
+      localStorage.clear();
+      this.props.history.push('/')
         
     }
     async componentDidMount(){
-            let res = await fetch('https://reqres.in/api/users')
-            const data = await res.json()
-            this.setState({
-                users : data.data
-            })
+      let res = await fetch('https://reqres.in/api/users')
+      const data = await res.json()
+      this.setState({
+          users : data.data
+      })
     }
     render(){ 
 
