@@ -5,7 +5,8 @@ class SignUp extends Component{
         super(props)
         this.state={
             email:"",
-            password:""
+            password:"",
+            error:""
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChnage =this.handleChnage.bind(this)
@@ -34,14 +35,20 @@ class SignUp extends Component{
                 password
             })
         })
+        const data = await res.json()
         if(res.status === 200){
             this.props.history.push('/dashboard')
+        }else{
+            this.setState({
+                error: data.error
+            })
         }
+
     }
     render(){
         return(
             <form onSubmit={this.handleSubmit} className="form form-horizontal " >
-                <h1>Sign Up</h1>
+                <h1 className="text-muted" >Sign Up</h1>
                 <div className="form-group">
                     <label htmlFor="Email">Email</label>
                     <input type="text" name="email" onChange={this.handleChnage} className="form-control"/>
@@ -50,8 +57,9 @@ class SignUp extends Component{
                     <label htmlFor="Password">Password</label>
                     <input type="text" name="password" onChange={this.handleChnage} className="form-control"/>
                 </div>
-                <div><p>You have already Account ? <Link to="/signin" >Sign in now</Link> </p> </div>
-                <input type="submit" value="Sign up" className="btn btn-primary" />
+                {!this.state.error ? "": <p className="alert alert-danger">{this.state.error}</p>}
+                <input type="submit" value="Sign up" className="btn btn-success" />
+                <div><p>You have already Account ? <Link to="/signin" >SignIn now</Link> </p> </div>
             </form>
         )
     }

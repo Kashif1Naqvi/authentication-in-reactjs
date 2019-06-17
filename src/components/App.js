@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 class App extends Component{
     render(){
-        return <Authentication />
+        return <div className="container" ><Authentication /></div>
     }
 }
 export default App;

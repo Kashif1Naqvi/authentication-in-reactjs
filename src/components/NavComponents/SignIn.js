@@ -9,7 +9,6 @@ class SignIn extends Component{
         if(token == null){
             loggedin = false
         }
-
         this.state = {
             email:"",
             password:"",
@@ -61,7 +60,7 @@ class SignIn extends Component{
         return(
 
             <form onSubmit={this.handleSubmit} className="form form-horizontal " >
-                <h1>Sign In</h1>
+                <h1 className="text-muted" >Sign In</h1>
                 <div className="form-group">
                     <label htmlFor="Email">Email</label>
                     <input type="text"  onChange={this.handleChange}  name="email"  className="form-control"/>
@@ -70,8 +69,8 @@ class SignIn extends Component{
                     <label htmlFor="Password">Password</label>
                     <input type="text"  name="password" onChange={this.handleChange}  className="form-control"/>
                 </div>
-                <p className="alert-danger" >{this.state.error}</p>
-                <input type="submit" value="Login" className="btn btn-primary" />
+                {this.state.error?<p className="alert alert-danger" >{this.state.error}</p>:""}
+                <input type="submit" value="Login" className="btn btn-success" />
                 <div>Don't have a account? <Link  to="/signup" >SignUp now</Link> </div>
             </form>
         )
