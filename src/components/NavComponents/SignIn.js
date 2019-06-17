@@ -1,50 +1,43 @@
 import React,{Component} from 'react'
-import {withRouter,Redirect,Link} from 'react-router-dom'
+import {withRouter , Link} from 'react-router-dom'
+
 class SignIn extends Component{
     constructor(props){
         super(props)
-        let token = localStorage.getItem('token')
-        let loggedin = true
-        
-        if(token == null){
-            loggedin = false
-        }
         this.state = {
             email:"",
-            password:"",
-            loggedin,
+            password:"", 
             error : null
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
-    handleChange=(e)=>{
-        const value = e.target.value
-        const name = e.target.name
-        this.setState({
-            [name] : value,
-        })
+    
+    handleChange (evt) { 
+      this.setState({ [evt.target.name]: evt.target.value });
     }
-
+    
      handleSubmit = async (event) =>  {
         event.preventDefault()
-        const email = this.state.email
-        const password = this.state.password
+        
+        let formData = {
+          email: this.state.email,
+          password: this.state.password
+        } 
+
         let res = await  fetch('https://reqres.in/api/login',{
             method:'POST',
             headers:{
                 "Accept": "application/json",
                 'Content-Type':'application/json'
             },
-            body:JSON.stringify({
-                email,
-                password
-            })
+            body:JSON.stringify(formData)
         })
-        let data = await res.json()
-        if( res.status === 200 ){
-         let token = data.token
-          localStorage.setItem('token',JSON.stringify(token))
+
+        let data = await res.json() 
+        console.log(data.token)
+        if( res.status === 200 ){ 
+          localStorage.setItem('token', JSON.stringify(data.token))
           this.props.history.push('/dashboard')
         }else{
             this.setState({
@@ -53,10 +46,7 @@ class SignIn extends Component{
         }
     }
 
-    render(){
-        if(this.state.loggedin){
-            return <Redirect to="/dashboard" />
-        }
+    render(){ 
         return(
 
             <form onSubmit={this.handleSubmit} className="form form-horizontal " >

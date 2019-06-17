@@ -1,23 +1,16 @@
 import React,{Component} from 'react'
-import {Redirect,withRouter } from 'react-router-dom'
+import {withRouter } from 'react-router-dom'
 import UserList from '../Users/UserList'
 class Dashboard extends Component{
     constructor(props){
         super(props)
-        let loggedIn = true
-        let token = localStorage.getItem('token')
-        if(token == null){
-            loggedIn = false
+        this.state = {
+            users: []
         }
-        this.state = { 
-                        users:[],
-                        loggedIn 
-                }
-        this.logout = this.logout.bind(this)
     }
     logout = () => {
-        localStorage.removeItem('token')
-        this.props.history.push('/signin')
+        localStorage.clear();
+        this.props.history.push('/')
         
     }
     async componentDidMount(){
@@ -27,10 +20,8 @@ class Dashboard extends Component{
                 users : data.data
             })
     }
-    render(){
-        if(this.state.loggedIn === false){
-            return <Redirect to="/signin" />
-        }
+    render(){ 
+
         const userList = this.state.users.map((user)=>{return <UserList user={user}  key={user.id} />})
         return(
             <div className="container" >
