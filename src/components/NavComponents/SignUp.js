@@ -9,10 +9,8 @@ class SignUp extends Component{
       password:"",
       error:""
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChnage =this.handleChnage.bind(this)
   }
-    
+   
   handleChnage = (e) => {
     this.setState({
       [e.target.name]:e.target.value
