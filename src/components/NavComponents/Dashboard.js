@@ -14,23 +14,22 @@ class Dashboard extends Component{
         
     }
     async componentDidMount(){
-      let res = await fetch('https://reqres.in/api/users')
+      let res = await fetch('https://randomuser.me/api/?results=1000')
       const data = await res.json()
+      
       this.setState({
-          users : data.data
+          users : data.results
       })
     }
     render(){ 
-
-        const userList = this.state.users.map((user)=>{return <UserList user={user}  key={user.id} />})
+        console.log(this.state.users)
+        const userList = this.state.users.map((user,index)=>{return <UserList user={user}  key={index} />})
         return(
-            <div className="container" >
-                <div className="section">
+              <div className="section">
                     <button className="btn btn-success float-right mt-3 pt-2 " onClick={this.logout}  >Logout</button>
-                    <h1 className=" text-muted " >Users</h1> <br />
+                    <h1 className=" text-muted text-center" >Users</h1> <br />
                     <div className="row">{userList}</div> <br />
                 </div>
-            </div>
         )
 
     }

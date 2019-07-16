@@ -8,7 +8,7 @@ class Authentication extends Component{
     render(){
         return(
             <Router>
-              <div className="container" >
+              <div className="container-fluid" >
                 <Route exact path="/" component={Home} />
                 <Route path="/dashboard" component={() => localStorage.token == null ? <Redirect to="/" /> : <Dashboard /> } />
                 <Route path="/signin" component={SignIn} />
